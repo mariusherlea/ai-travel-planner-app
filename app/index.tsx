@@ -1,6 +1,7 @@
 import { Colors } from "@/constants/Colors";
 import { Image, Text, View } from "react-native";
 import { StyleSheet } from "react-native";
+import Login from "./../components/Login";
 
 export default function Index() {
   return (
@@ -33,13 +34,7 @@ export default function Index() {
           Discover your next adventure effortlessly. Personalized itineraries at
           your fingertips.Travel smarter with AI-driven insights.
         </Text>
-        <View style={styles.button}>
-          <Text
-            style={{ fontSize: 16, textAlign: "center", color: Colors.WHITE }}
-          >
-            Sign In with Google
-          </Text>
-        </View>
+        <Login />
       </View>
     </View>
   );
@@ -52,11 +47,5 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 25,
-  },
-  button: {
-    backgroundColor: Colors.PRIMARY,
-    padding: 15,
-    borderRadius: 99,
-    marginTop: "20%",
   },
 });
