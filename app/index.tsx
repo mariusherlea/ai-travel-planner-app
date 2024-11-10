@@ -1,19 +1,45 @@
+import { Colors } from "@/constants/Colors";
 import { Image, Text, View } from "react-native";
-import Login from "../components/Login";
 import { StyleSheet } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default function Index() {
   return (
     <View>
       <Image
-        source={require("../assets/images/KofferV3.png")}
-        style={{ width: "100%", height: 500 }}
-      />
+        source={require("./../assets/images/pngwing.com.png")}
+        style={{
+          width: "100%",
+          height: 350,
+        }}
+      ></Image>
       <View style={styles.container}>
-        <Text style={{ fontSize: 28, fontFamily: "outfit-bold" }}>
-          AI Travel Planner
+        <Text
+          style={{
+            fontSize: 32,
+            textAlign: "center",
+            marginTop: 10,
+          }}
+        >
+          Ai Travel Planner.
         </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "center",
+            color: Colors.GREY,
+            marginTop: 20,
+          }}
+        >
+          Discover your next adventure effortlessly. Personalized itineraries at
+          your fingertips.Travel smarter with AI-driven insights.
+        </Text>
+        <View style={styles.button}>
+          <Text
+            style={{ fontSize: 16, textAlign: "center", color: Colors.WHITE }}
+          >
+            Sign In with Google
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -22,6 +48,15 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.WHITE,
-    marginTop: -20,
+    marginTop: -5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 25,
+  },
+  button: {
+    backgroundColor: Colors.PRIMARY,
+    padding: 15,
+    borderRadius: 99,
+    marginTop: "20%",
   },
 });
