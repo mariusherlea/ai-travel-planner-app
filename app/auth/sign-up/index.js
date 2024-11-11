@@ -6,6 +6,8 @@ import { TextInput } from "react-native";
 import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { auth } from "./../../../configs/FireBaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function SignUp() {
   const navigation = useNavigation();
@@ -16,6 +18,23 @@ export default function SignUp() {
     });
   }, []);
   const router = useRouter();
+
+  const OnCreateAccount = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage, errorCode);
+        // ..
+      });
+  };
+
   return (
     <View
       style={{
