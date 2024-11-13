@@ -2,8 +2,11 @@ import { Colors } from "@/constants/Colors";
 import { Image, Text, View } from "react-native";
 import { StyleSheet } from "react-native";
 import Login from "./../components/Login";
+import { auth } from "./../configs/FireBaseConfig";
+import { Redirect } from "expo-router";
 
 export default function Index() {
+  const user = auth.currentUser;
   return (
     <View>
       <Image
@@ -12,7 +15,7 @@ export default function Index() {
           width: "100%",
           height: 350,
         }}
-      ></Image>
+      />
       <View style={styles.container}>
         <Text
           style={{
@@ -34,7 +37,7 @@ export default function Index() {
           Discover your next adventure effortlessly. Personalized itineraries at
           your fingertips.Travel smarter with AI-driven insights.
         </Text>
-        <Login />
+        {user ? <Redirect href={"/(tabs)/mytrip"} /> : <Login />}
       </View>
     </View>
   );
