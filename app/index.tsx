@@ -1,12 +1,11 @@
 import { Colors } from "@/constants/Colors";
 import { Image, Text, View } from "react-native";
 import { StyleSheet } from "react-native";
-import Login from "./../components/Login";
-import { auth } from "./../configs/FireBaseConfig";
-import { Redirect } from "expo-router";
+import { TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function Index() {
-  const user = auth.currentUser;
+  const router = useRouter();
   return (
     <View>
       <Image
@@ -37,7 +36,25 @@ export default function Index() {
           Discover your next adventure effortlessly. Personalized itineraries at
           your fingertips.Travel smarter with AI-driven insights.
         </Text>
-        {user ? <Redirect href={"/(tabs)/mytrip"} /> : <Login />}
+        <TouchableOpacity
+          onPress={() => {
+            router.push("/(tabs)/mytrip");
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 16,
+              textAlign: "center",
+              color: Colors.WHITE,
+              backgroundColor: Colors.PRIMARY,
+              padding: 15,
+              borderRadius: 10,
+              marginTop: 20,
+            }}
+          >
+            Get Started
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
