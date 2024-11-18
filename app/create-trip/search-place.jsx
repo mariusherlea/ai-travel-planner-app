@@ -5,7 +5,6 @@ import { Colors } from "@/constants/Colors";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { v4 as uuidv4 } from "uuid";
 import "react-native-get-random-values";
-import { GOOGLE_MAP_API_KEY } from "@env";
 
 export default function searchPlace() {
   uuidv4();
@@ -28,12 +27,13 @@ export default function searchPlace() {
     >
       <GooglePlacesAutocomplete
         placeholder="Search"
+        fetchDetails={true}
         onPress={(data, details = null) => {
           // 'details' is provided when fetchDetails = true
           console.log(data, details);
         }}
         query={{
-          key: GOOGLE_MAP_API_KEY,
+          key: process.env.GOOGLE_MAP_API_KEY,
           language: "en",
         }}
       />
