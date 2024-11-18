@@ -3,8 +3,10 @@ import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native";
 import { Colors } from "@/constants/Colors";
+import { useRouter } from "expo-router";
 
 export default function StartNewTripCard() {
+  const router = useRouter();
   return (
     <View
       style={{
@@ -21,6 +23,7 @@ export default function StartNewTripCard() {
         Look like its time to plan a new travel experience! Get started below
       </Text>
       <TouchableOpacity
+        onPress={() => router.push("/create-trip/search-place")}
         style={{
           padding: 15,
           backgroundColor: "black",
