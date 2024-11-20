@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useContext } from "react";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { v4 as uuidv4 } from "uuid";
@@ -11,6 +11,7 @@ export default function searchPlace() {
   uuidv4();
   const navigation = useNavigation();
   const { tripData, setTripData } = useContext(CreateTripContext);
+  const router = useRouter();
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
@@ -41,12 +42,6 @@ export default function searchPlace() {
           console.log(details?.photos[0]?.photo_reference);
           console.log(details?.url);
           setTripData({
-            // ...tripData,
-            // placeId: data.place_id,
-            // placeName: data.description,
-            // placeLocation: details?.geometry?.location,
-            // placeImage: details?.photos[0]?.photo_reference,
-            // placeUrl: details?.url,
             locationInfo: {
               name: data.description,
               coordinates: details?.geometry?.location,
@@ -54,6 +49,7 @@ export default function searchPlace() {
               url: details?.url,
             },
           });
+          router.push("/create-trip/select-traveler");
         }}
         query={{
           key: process.env.GOOGLE_MAP_API_KEY,
