@@ -1,13 +1,16 @@
 import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigation } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { FlatList } from "react-native";
 import { selectTravelerList } from "./../../constants/Options";
 import { TouchableOpacity } from "react-native";
+import { CreateTripContext } from "@/context/CreateTripContext";
 
 export default function SelectTraveler() {
   const navigation = useNavigation();
+  const [SelectedTraveler, setSelectedTraveler] = useState();
+  const { tripData, setTripData } = useContext(CreateTripContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -16,22 +19,30 @@ export default function SelectTraveler() {
       headerTitle: "",
     });
   }, []);
-  const [SelectedTraveler, setSelectedTraveler] = useState();
+  useEffect(() => {
+    setTripData({
+      ...tripData,
+      traveler: SelectedTraveler,
+    });
+  }, [SelectedTraveler]);
 
   const Item = ({ item }) => (
-    <TouchableOpacity onPress={() => setSelectedTraveler(item.title)}>
+    <TouchableOpacity onPress={() => setSelectedTraveler(item)}>
       <View
-        style={{
-          padding: 5,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          backgroundColor: Colors.YELLOW,
-          marginBottom: 10,
-          marginTop: 5,
-          borderRadius: 15,
-        }}
+        style={[
+          {
+            padding: 5,
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            backgroundColor: Colors.YELLOW,
+            marginBottom: 10,
+            marginTop: 5,
+            borderRadius: 15,
+          },
+          SelectedTraveler?.id == item?.id && { borderWidth: 3 },
+        ]}
       >
         <View style={{ padding: 15 }}>
           <Text style={{ fontSize: 20 }}>{item?.title}</Text>
@@ -60,6 +71,25 @@ export default function SelectTraveler() {
           keyExtractor={(item) => item.id}
         />
       </View>
+      <TouchableOpacity
+        style={{
+          padding: 15,
+          backgroundColor: Colors.PRIMARY,
+          borderRadius: 15,
+          marginTop: 20,
+        }}
+      >
+        <Text
+          style={{
+            justifyContent: "center",
+            color: Colors.WHITE,
+            alignContent: "center",
+            textAlign: "center",
+          }}
+        >
+          Continue
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
