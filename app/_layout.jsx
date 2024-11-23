@@ -6,7 +6,7 @@ export default function RootLayout() {
   const [tripData, setTripData] = useState({});
   return (
     <CreateTripContext.Provider value={{ tripData, setTripData }}>
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack screenOptions={{ headerShown: true }}>
         <Stack.Screen name="(tabs)" />
       </Stack>
     </CreateTripContext.Provider>
