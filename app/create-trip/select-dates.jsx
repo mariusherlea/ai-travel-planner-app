@@ -1,40 +1,67 @@
 import React, { Component } from "react";
+import { TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
+import { Colors } from "@/constants/Colors";
+import { Link } from "expo-router";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedStartDate: null,
-    };
-    this.onDateChange = this.onDateChange.bind(this);
-  }
-
-  onDateChange(date) {
-    this.setState({
-      selectedStartDate: date,
-    });
+  onDateChange(date, type) {
+    console.log(date, type);
   }
   render() {
-    const { selectedStartDate } = this.state;
-    const startDate = selectedStartDate ? selectedStartDate.toString() : "";
     return (
       <View style={styles.container}>
-        <CalendarPicker onDateChange={this.onDateChange} />
-
-        <View>
-          <Text>SELECTED DATE:{startDate}</Text>
-        </View>
+        <Text style={{ fontSize: 35, padding: 20 }}>Travel dates</Text>
+        <CalendarPicker
+          onDateChange={this.onDateChange}
+          allowRangeSelection={true}
+          minDate={new Date()}
+        />
+        <TouchableOpacity
+          style={{
+            padding: 15,
+            backgroundColor: Colors.PRIMARY,
+            borderRadius: 15,
+            marginTop: 20,
+          }}
+          onPress={onDateSelectContinue}
+        >
+          {/* <Link
+            href={"/create-trip/select-dates"}
+            style={{ textAlign: "center" }}
+          > */}
+          <Text
+            style={{
+              justifyContent: "center",
+              color: Colors.WHITE,
+              alignContent: "center",
+            }}
+          >
+            Continue
+          </Text>
+          {/* </Link> */}
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
+const onDateSelectContinue = () => {
+  console.log("continue");
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    marginTop: 100,
+    padding: 5,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: Colors.YELLOW,
+    marginTop: 5,
+    borderRadius: 15,
   },
 });
