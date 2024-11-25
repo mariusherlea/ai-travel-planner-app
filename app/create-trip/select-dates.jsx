@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { ToastAndroid, TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
@@ -6,10 +6,12 @@ import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
 import { useState } from "react";
 import moment from "moment";
+import { CreateTripContext } from "@/context/CreateTripContext";
 
 export default function SelectDate() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+  const { tripData, setTripData } = useContext(CreateTripContext);
 
   onDateChange = (date, type) => {
     console.log(date, type);
@@ -27,6 +29,12 @@ export default function SelectDate() {
     }
     const totalNoOfDays = endDate.diff(startDate, "days");
     console.log(totalNoOfDays + 1);
+    setTripData({
+      ...tripData,
+      startDate: startDate,
+      endDate: endDate,
+      totalNoOfDays: totalNoOfDays + 1,
+    });
   };
   return (
     <View style={styles.container}>
