@@ -3,15 +3,27 @@ import { ToastAndroid, TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import { Colors } from "@/constants/Colors";
-import { Link } from "expo-router";
 import { useState } from "react";
 import moment from "moment";
 import { CreateTripContext } from "@/context/CreateTripContext";
+import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
 
 export default function SelectDate() {
+  const navigation = useNavigation();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const { tripData, setTripData } = useContext(CreateTripContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerTransparent: true,
+      headerTitle: "",
+    });
+  }, []);
 
   onDateChange = (date, type) => {
     console.log(date, type);
@@ -35,6 +47,7 @@ export default function SelectDate() {
       endDate: endDate,
       totalNoOfDays: totalNoOfDays + 1,
     });
+    router.push("/create-trip/select-budget");
   };
   return (
     <View style={styles.container}>
@@ -53,10 +66,6 @@ export default function SelectDate() {
         }}
         onPress={onDateSelectContinue}
       >
-        {/* <Link
-            href={"/create-trip/select-dates"}
-            style={{ textAlign: "center" }}
-          > */}
         <Text
           style={{
             justifyContent: "center",
@@ -66,7 +75,6 @@ export default function SelectDate() {
         >
           Continue
         </Text>
-        {/* </Link> */}
       </TouchableOpacity>
     </View>
   );
