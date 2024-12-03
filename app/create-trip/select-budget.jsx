@@ -84,7 +84,7 @@ export default function SelectBudget() {
           marginTop: 20,
         }}
       >
-        <Link href={""} style={{ textAlign: "center" }}>
+        <Link href={"/create-trip/review-trip"} style={{ textAlign: "center" }}>
           <Text
             style={{
               justifyContent: "center",
